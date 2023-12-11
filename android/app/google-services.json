@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "639142710201",
+    "project_id": "bekya-9038f",
+    "storage_bucket": "bekya-9038f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639142710201:android:4af540164e8b6c7a1f8468",
+        "android_client_info": {
+          "package_name": "com.example.bekya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0oidchsz5jCGzG31jf-gdxR76edI_EdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
