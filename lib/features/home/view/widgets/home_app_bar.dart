@@ -1,4 +1,8 @@
+import 'package:bekya/core/shared/my_shared.dart';
+import 'package:bekya/core/shared/my_shared_keys.dart';
 import 'package:bekya/core/styles/colors.dart';
+import 'package:bekya/core/utils/navigators.dart';
+import 'package:bekya/features/cities/view/screens/cities_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -23,16 +27,22 @@ class HomeAppBar extends StatelessWidget {
             ),
             ),
             SizedBox(height: 1.h,),
-            Row(
-              children: [
-                Icon(Icons.location_on_outlined,color: AppColors.primary,),
-                SizedBox(width: 2.w,),
-                Text("Cairo,Egypt",style:  TextStyle(color: AppColors.offWhite),),
-                Icon(Icons.keyboard_arrow_down_outlined,color: AppColors.offWhite,),
-                Spacer(),
-                IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_none,color: AppColors.offWhite,)),
-              ],
+            InkWell(
+              onTap: (){
+                push(context, CitiesScreen());
+              },
+              child: Row(
+                children: [
+                  Icon(Icons.location_on_outlined,color: AppColors.primary,),
+                  SizedBox(width: 2.w,),
+                  Text("${MyShared.getString(key: MySharedKeys.city)}",style:  TextStyle(color: AppColors.offWhite),),
+                  Icon(Icons.keyboard_arrow_down_outlined,color: AppColors.offWhite,),
+                  Spacer(),
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_none,color: AppColors.offWhite,)),
+                ],
+              ),
             ),
+
             SizedBox(height: 1.h,)
           ],
         ),

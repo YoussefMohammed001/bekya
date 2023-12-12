@@ -26,7 +26,7 @@ class ChatsScreen extends StatelessWidget {
         Expanded(
           child: ListView.separated(
             itemBuilder: (context, index) {
-              return const ChatItem(image: 'Y', name: 'Menna', message: 'I LOVE YOU', date: '24/11',);
+              return const ChatItem(image: 'M', name: 'Mohamed', message: '............', date: '24/11',);
             },
             itemCount: 12, separatorBuilder: (BuildContext context, int index) {
               return Container(

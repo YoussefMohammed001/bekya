@@ -3,7 +3,7 @@ class Categories {
   String? _category;
   String? _image;
 
-  Categories(this._id, this._image,);
+  Categories(this._id, this._image,this._category);
 
   Categories.fromMap(Map<String,dynamic> data){
     _id = data['id'];
@@ -22,9 +22,7 @@ class Categories {
 
   String get category => _category ?? "";
 
-  set userId(String value) {
-    _category = value;
-  }
+
 
   String get id => _id ?? "";
 

@@ -63,14 +63,14 @@ final String type,area,bedRooms,bathRooms,payment,description;
                             fontSize: 18.sp),
                       ),
                       SizedBox(height: 1.h,),
-                      Text(
-                        "Payment Option:",
-                        style: TextStyle(
-                            color: AppColors.offWhite,
-
-                            fontSize: 18.sp),
-                      ),
-                      SizedBox(height: 1.h,),
+                      // Text(
+                      //   "Payment Option:",
+                      //   style: TextStyle(
+                      //       color: AppColors.offWhite,
+                      //
+                      //       fontSize: 18.sp),
+                      // ),
+                      // SizedBox(height: 1.h,),
                     ],
                   ),
                   SizedBox(width: 9.w,),
@@ -112,14 +112,14 @@ final String type,area,bedRooms,bathRooms,payment,description;
                             fontSize: 18.sp),
                       ),
                       SizedBox(height: 1.h,),
-                      Text(
-                        payment,
-                        style: TextStyle(
-                            color: AppColors.offWhite,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.sp),
-                      ),
-                      SizedBox(height: 1.h,),
+                      // Text(
+                      //   payment,
+                      //   style: TextStyle(
+                      //       color: AppColors.offWhite,
+                      //       fontWeight: FontWeight.bold,
+                      //       fontSize: 18.sp),
+                      // ),
+                      // SizedBox(height: 1.h,),
                     ],
                   ),
                 ],

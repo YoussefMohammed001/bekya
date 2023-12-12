@@ -35,7 +35,7 @@ class MyShared {
   }
 
   static bool isLoggedIn() {
-    return (_preferences?.getString(MySharedKeys.apiToken.name) ?? "")
+    return (_preferences?.getString(MySharedKeys.userid.name) ?? "")
         .isNotEmpty;
   }
 

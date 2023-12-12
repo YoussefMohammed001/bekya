@@ -2,6 +2,7 @@ import 'package:bekya/core/cubit/categories/categories_cubit.dart';
 import 'package:bekya/core/styles/colors.dart';
 import 'package:bekya/core/utils/navigators.dart';
 import 'package:bekya/core/widgets/categories_item.dart';
+import 'package:bekya/features/sell_Product/view/screens/sold_product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -48,23 +49,31 @@ class SellProductScreen extends StatelessWidget {
             ),
             BlocBuilder<CategoriesCubit, CategoriesState>(
               builder: (context, state) {
-              if(state is GetCatLoading){
-                return const Expanded(child: Center(child: CircularProgressIndicator()));
-              } else{
-                return Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      return CategoriesItem(
-                        icon: cubit.cats[index].image,
-                        title: cubit.cats[index].category,
-                        onTap: () {},
-                      );
-                    },
-
-                    itemCount: cubit.cats.length,
-                  ),
-                );
-              }
+                if (state is GetCatLoading) {
+                  return const Expanded(
+                      child: Center(child: CircularProgressIndicator()));
+                } else {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return CategoriesItem(
+                          icon: cubit.cats[index].image,
+                          title: cubit.cats[index].category,
+                          onTap: () {
+                            push(
+                                context,
+                                SoldProductDetails(
+                                  image: cubit.cats[index].image,
+                                  id: cubit.cats[index].id,
+                                  category: cubit.cats[index].category,
+                                ));
+                          },
+                        );
+                      },
+                      itemCount: cubit.cats.length,
+                    ),
+                  );
+                }
               },
             )
           ],
