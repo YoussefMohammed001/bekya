@@ -35,7 +35,7 @@ final VoidCallback onTap;
               ),),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Icon(Icons.arrow_forward_ios_rounded,color: AppColors.offWhite,
             size: 23.sp,
           ),

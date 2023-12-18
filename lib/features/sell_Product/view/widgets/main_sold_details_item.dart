@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class MainSoldDetailsItem extends StatelessWidget {
-   MainSoldDetailsItem({super.key, required this.priceEditingController, required this.titleEditingController, required this.descriptionEditingController, required this.image, required this.id, required this.category});
+ const  MainSoldDetailsItem({super.key, required this.priceEditingController, required this.titleEditingController, required this.descriptionEditingController, required this.image, required this.id, required this.category});
   final TextEditingController priceEditingController ;
   final TextEditingController titleEditingController ;
   final TextEditingController descriptionEditingController;
@@ -57,11 +57,11 @@ class MainSoldDetailsItem extends StatelessWidget {
             SizedBox(height: 2.h,),
             AppTextField(
                 hint: "..........",
-                keyboardType: TextInputType.number,
-                icon: Icons.attach_money_sharp,
+                keyboardType: TextInputType.text,
+                icon: Icons.title,
                 controller: titleEditingController,
                 isPassword: false,
-                textInputAction: TextInputAction.done,
+                textInputAction: TextInputAction.next,
                 title: "add title for your product"),
 
 
@@ -87,7 +87,7 @@ class MainSoldDetailsItem extends StatelessWidget {
                 icon: Icons.attach_money_sharp,
                 controller: priceEditingController,
                 isPassword: false,
-                textInputAction: TextInputAction.done,
+                textInputAction: TextInputAction.next,
                 title: "add your price"),
 
 
@@ -109,11 +109,11 @@ class MainSoldDetailsItem extends StatelessWidget {
             SizedBox(height: 2.h,),
             AppTextField(
                 hint: "... .... ... ... ",
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 icon: Icons.description_outlined,
-                controller: priceEditingController,
+                controller: descriptionEditingController,
                 isPassword: false,
-                textInputAction: TextInputAction.done,
+                textInputAction: TextInputAction.next,
                 title: "add description for your product"),
 
 

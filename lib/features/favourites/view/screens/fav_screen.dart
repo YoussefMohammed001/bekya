@@ -10,7 +10,7 @@ class FavScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppColors.offWhite),
+        iconTheme: const IconThemeData(color: AppColors.offWhite),
         backgroundColor: AppColors.second,
       ),
       backgroundColor: AppColors.second,

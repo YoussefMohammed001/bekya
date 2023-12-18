@@ -35,21 +35,21 @@ return Container(
       SizedBox(height: 2.h,),
       Row(
         children: [
-          Icon(
+          const Icon(
             Icons.location_on_outlined,
             color: AppColors.offWhite,
           ),
           SizedBox(width: 2.w,),
           Text(
             location,
-            style: TextStyle(
+            style: const TextStyle(
               color: AppColors.offWhite,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Text(
             date,
-            style: TextStyle(
+            style: const TextStyle(
               color: AppColors.offWhite,
             ),
           ),

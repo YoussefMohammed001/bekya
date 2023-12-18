@@ -64,7 +64,7 @@ class HomeCategoriesWidgets extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      push(context, CategoryProducts());
+                      push(context, const CategoryProducts());
                     },
                     child: Column(
                       children: [

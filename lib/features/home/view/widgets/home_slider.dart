@@ -1,4 +1,3 @@
-import 'package:bekya/core/widgets/app_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -18,19 +17,17 @@ class HomeSlider extends StatelessWidget {
     return  CarouselSlider(
       items: imgList.map((e) {
         return Card(
-          shape: RoundedRectangleBorder(
-
-          ),
+          shape: const RoundedRectangleBorder(),
           child: Align(
             alignment: Alignment.center,
             child:Image.network( e,width: double.infinity,height: 15.h,fit: BoxFit.fitWidth,),
           ),
         );
       }).toList(),
-      options: CarouselOptions(
-height: 15.h,
+      options:
+      CarouselOptions(
+        height: 15.h,
         viewportFraction: 1,
-
 
       ),
     );

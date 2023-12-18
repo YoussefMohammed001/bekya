@@ -76,7 +76,7 @@ final VoidCallback onFavTap;
                             children: [
                               const Icon(Icons.bed_outlined,color: AppColors.offWhite,),
                               SizedBox(width: 1.w,),
-                               Text("$bed",style: TextStyle(color:AppColors.offWhite ),)
+                               Text("$bed",style: const TextStyle(color:AppColors.offWhite ),)
                             ],
                           ),
                           SizedBox(width: 4.w,),
@@ -85,7 +85,7 @@ final VoidCallback onFavTap;
                             children: [
                               const Icon(Icons.shower,color: AppColors.offWhite,),
                               SizedBox(width: 1.w,),
-                               Text("$bath",style: TextStyle(color:AppColors.offWhite ),)
+                               Text("$bath",style: const TextStyle(color:AppColors.offWhite ),)
                             ],
                           ),
                           SizedBox(width: 4.w,),
@@ -93,7 +93,7 @@ final VoidCallback onFavTap;
                             children: [
                               const Icon(Icons.space_dashboard_outlined,color: AppColors.offWhite,),
                               SizedBox(width: 1.w,),
-                               Text('$area',style: TextStyle(color:AppColors.offWhite ),)
+                               Text('$area',style: const TextStyle(color:AppColors.offWhite ),)
                             ],
                           ),
                         ],

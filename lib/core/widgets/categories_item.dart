@@ -24,8 +24,8 @@ final VoidCallback onTap;
                 fontSize: 18.sp,
               ),
             ),
-            Spacer(),
-            Icon(Icons.arrow_forward_ios_rounded,color: AppColors.offWhite,)
+            const Spacer(),
+            const Icon(Icons.arrow_forward_ios_rounded,color: AppColors.offWhite,)
           ],
         ),
       ),

@@ -12,12 +12,12 @@ final String name;
       child: Row(
         children: [
           CircleAvatar(
+            backgroundColor: AppColors.primary,
+            radius: 25.sp,
             child: Text("Y",style: TextStyle(
                 color: AppColors.offWhite,
                 fontSize: 28.sp
             ),),
-            backgroundColor: AppColors.primary,
-            radius: 25.sp,
           ),
           SizedBox(width: 5.w,),
           Column(

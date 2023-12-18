@@ -8,7 +8,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainScreen extends StatefulWidget {
-   MainScreen({super.key});
+   const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();

@@ -2,8 +2,8 @@
 import 'package:bekya/core/styles/colors.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
+// ignore: must_be_immutable
 class DropDownTextFormField extends StatefulWidget {
   DropDownTextFormField({Key? key,  required this.hint, this.validators, required this.controller, required this.enabled, required this.dropDownList,  this.count = 0, this.onChanged}) : super(key: key);
   final String hint;
@@ -34,8 +34,8 @@ class _DropDownTextFormFieldState extends State<DropDownTextFormField> {
         children: [
           DropDownTextField(
             dropdownColor: AppColors.second,
-               listTextStyle: TextStyle(color: AppColors.offWhite),
-              textStyle: TextStyle(color: AppColors.offWhite),
+               listTextStyle: const TextStyle(color: AppColors.offWhite),
+              textStyle: const TextStyle(color: AppColors.offWhite),
               dropDownItemCount: widget.count,
               clearOption: false,
               onChanged: widget.onChanged,

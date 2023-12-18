@@ -2,7 +2,6 @@ import 'package:bekya/core/utils/safe_print.dart';
 import 'package:bekya/features/cities/model/cities_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meta/meta.dart';
 
 part 'cities_state.dart';
 
@@ -21,7 +20,7 @@ class CitiesCubit extends Cubit<CitiesState> {
         final category = Cities.fromMap(document.data());
         cities.add(category);
         emit(CitiesSuccess());
-        print(cities[0].city);
+        safePrint(cities[0].city);
       }
     }).catchError((error) {
       emit(CitiesFailure());

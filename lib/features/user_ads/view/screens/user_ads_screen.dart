@@ -101,7 +101,7 @@ class UserAdsScreen extends StatelessWidget {
                 return  MainProductItem(
                   price: 'EGP 1,000,000',
                   title:
-                      'sdf sdfsdf sdf sdfsd fsd f sdf dsf sdf sd fds fsd f sdf dsf dsf sd fsd fsdf s',
+                      'sdf sdfsdf sdf sdfsd fsd f sdf dsf sdf sd fds fsd f sdf dsf dsf sd fsd fsdfs',
                   date: '3 days ago.',
                   city: 'Cairo, Future City',
                   bed: 5,

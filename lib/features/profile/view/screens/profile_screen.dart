@@ -1,8 +1,13 @@
+import 'package:bekya/core/shared/my_shared.dart';
+import 'package:bekya/core/shared/my_shared_keys.dart';
 import 'package:bekya/core/styles/colors.dart';
 import 'package:bekya/core/utils/navigators.dart';
+import 'package:bekya/core/widgets/app_button.dart';
 import 'package:bekya/features/favourites/view/screens/fav_screen.dart';
+import 'package:bekya/features/login/view/screens/login_screen.dart';
 import 'package:bekya/features/profile/view/widgets/item.dart';
 import 'package:bekya/features/profile/view/widgets/profile_header.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -22,15 +27,15 @@ class ProfileScreen extends StatelessWidget {
             child: IntrinsicHeight(
                 child: Column(
               children: [
-                const ProfileHeader(
-                  name: 'Youssef',
+                 ProfileHeader(
+                  name: MyShared.getString(key: MySharedKeys.username),
                 ),
                 Item(
                   title: 'Favourites',
                   body: 'Al of your favourite ads',
                   icon: Icons.favorite_outline,
                   onTap: () {
-                    push(context, FavScreen());
+                    push(context, const FavScreen());
                   },
                 ),
                 Container(
@@ -71,6 +76,20 @@ class ProfileScreen extends StatelessWidget {
                   body: 'Contact us & add your complain',
                   icon: Icons.contacts_outlined,
                   onTap: () {},
+                ),
+                const Spacer(),
+                AppButton(onPressed: (){
+                  FirebaseAuth.instance.signOut().then((value) {
+                    MyShared.clear().then((value) {
+                      pushReplacement(context, LoginScreen());
+                    });
+                  });
+                },
+                label: "Sign Out",
+                bgColor: AppColors.primary,
+                margin: EdgeInsets.all(14.sp),
+                padding: EdgeInsets.all(14.sp),
+                borderRadius: BorderRadius.circular(13.sp),
                 ),
               ],
             )),

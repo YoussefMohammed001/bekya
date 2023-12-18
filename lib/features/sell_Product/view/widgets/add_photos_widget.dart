@@ -34,9 +34,6 @@ class _AddPhotosWidgetsState extends State<AddPhotosWidgets> {
       child: Column(
         children: [
           Container(
-
-
-
             color: Colors.grey[800],
             child: Row(
               children: [

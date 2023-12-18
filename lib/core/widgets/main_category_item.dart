@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class MainCategoryItem extends StatelessWidget {
-   MainCategoryItem({super.key, required this.icon});
+   const MainCategoryItem({super.key, required this.icon});
 final String icon;
   @override
   Widget build(BuildContext context) {

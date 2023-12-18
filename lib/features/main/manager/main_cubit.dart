@@ -11,7 +11,7 @@ class MainCubit extends Cubit<MainState> {
   MainCubit() : super(MainInitial());
 int index = 0;
   List screens = [
-     HomeScreen(),
+    const HomeScreen(),
     const ChatsScreen(),
      SellProductScreen(),
     const MyAdsScreen(),

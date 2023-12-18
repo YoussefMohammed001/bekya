@@ -3,17 +3,14 @@ import 'package:bekya/core/widgets/app_text_field.dart';
 import 'package:bekya/core/widgets/drop_down.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:multiple_images_picker/multiple_images_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PropertySoldItem extends StatefulWidget {
-   PropertySoldItem({super.key, required this.type, required this.bedRoomsEditingController, required this.bathRoomsEditingController, required this.areaEditingController});
-
-  final SingleValueDropDownController type ;
-  final TextEditingController bedRoomsEditingController ;
+ const  PropertySoldItem({super.key, required this.type, required this.bedRoomsEditingController, required this.bathRoomsEditingController, required this.areaEditingController});
+  final SingleValueDropDownController type;
+  final TextEditingController bedRoomsEditingController;
   final TextEditingController bathRoomsEditingController;
-  final TextEditingController areaEditingController ;
-
+  final TextEditingController areaEditingController;
   @override
   State<PropertySoldItem> createState() => _PropertySoldItemState();
 }
@@ -28,6 +25,7 @@ class _PropertySoldItemState extends State<PropertySoldItem> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           Text(
             "Type *",
             style: TextStyle(
@@ -41,7 +39,7 @@ class _PropertySoldItemState extends State<PropertySoldItem> {
             controller: widget.type,
             enabled: false,
             count: 5,
-            dropDownList: [
+            dropDownList: const [
               DropDownValueModel(name: "name", value: "1"),
               DropDownValueModel(name: "name", value: "2"),
               DropDownValueModel(name: "name", value: "3"),
