@@ -43,7 +43,7 @@ class FavScreen extends StatelessWidget {
                   image:
 
                       'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmlsbGF8ZW58MHx8MHx8fDA%3D',
-                  onFavTap: () {},
+                  onFavTap: () {}, productId: '', catId: '',
                 );
               },
               itemCount: 2,

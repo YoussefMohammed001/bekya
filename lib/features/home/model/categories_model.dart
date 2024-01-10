@@ -30,12 +30,5 @@ class Categories {
     _id = value;
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'category': category,
-      'image': image,
 
-    };
-  }
 }

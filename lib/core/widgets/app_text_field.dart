@@ -61,7 +61,7 @@ class _AppTextFieldState extends State<AppTextField> {
       onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
         labelText: widget.title,
-        labelStyle: const TextStyle(color: AppColors.offWhite),
+        labelStyle:  TextStyle(color: Colors.grey[300]),
         prefixIcon: Icon(widget.icon,color: AppColors.primary,),
         suffixIcon: Visibility(
           visible: widget.isPassword,
@@ -89,6 +89,7 @@ class _AppTextFieldState extends State<AppTextField> {
         ),
         hintText: widget.hint,
         hintStyle:  const TextStyle(color: Colors.grey),
+
 
 
 

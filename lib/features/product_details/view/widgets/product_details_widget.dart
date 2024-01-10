@@ -8,6 +8,7 @@ final String type,area,bedRooms,bathRooms,payment,description;
   @override
   Widget build(BuildContext context) {
     return    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           padding: EdgeInsets.all(15.sp),

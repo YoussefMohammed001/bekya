@@ -13,5 +13,5 @@ enum MySharedKeys {
   theme,
   city,
   cityId,
-  currentLanguage,
+  currentLanguage, userImage, isVerified,
 }

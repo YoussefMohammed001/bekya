@@ -23,6 +23,8 @@ class LoginCubit extends Cubit<LoginState> {
      MyShared.putString(key: MySharedKeys.username, value: value.get('name'));
      MyShared.putString(key: MySharedKeys.email, value: value.get('phone'));
      MyShared.putString(key: MySharedKeys.imageUrl, value: value.get('image'));
+     MyShared.putBoolean(key: MySharedKeys.isVerified, value:firebaseAuth.currentUser!.emailVerified);
+
      });
       emit(LoginSuccess());
     }).catchError((error){

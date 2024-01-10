@@ -21,6 +21,8 @@ class CitiesCubit extends Cubit<CitiesState> {
         cities.add(category);
         emit(CitiesSuccess());
         safePrint(cities[0].city);
+        cities.sort((a, b)  => int.parse(a.id) - int.parse(b.id)
+        );
       }
     }).catchError((error) {
       emit(CitiesFailure());

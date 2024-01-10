@@ -1,14 +1,13 @@
 import 'package:bekya/core/styles/colors.dart';
 import 'package:bekya/core/widgets/app_text_field.dart';
+import 'package:bekya/features/sell_Product/manager/sell_product__cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class VehiclesSellItem extends StatelessWidget {
-  const VehiclesSellItem({super.key, required this.vehiclesNameEditingController, required this.vehiclesColorEditingController, required this.vehiclesModelEditingController, required this.vehiclesTypeEditingController});
- final  TextEditingController vehiclesNameEditingController ;
-   final TextEditingController vehiclesColorEditingController ;
-   final  TextEditingController vehiclesModelEditingController ;
-   final TextEditingController vehiclesTypeEditingController ;
+  const VehiclesSellItem({super.key, });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,10 +26,15 @@ class VehiclesSellItem extends StatelessWidget {
           ),
           SizedBox(height: 2.h,),
           AppTextField(
+              validators: (value) {
+                if(value!.isEmpty){
+                  return "this field is required";
+                }
+              },
               hint: "..........",
               keyboardType: TextInputType.text,
               icon: Icons.drive_file_rename_outline,
-              controller: vehiclesNameEditingController,
+              controller: context.read<SellProductCubit>().vehiclesNameEditingController,
               isPassword: false,
               textInputAction: TextInputAction.next,
               title: "mercedes"),
@@ -47,10 +51,15 @@ class VehiclesSellItem extends StatelessWidget {
           ),
           SizedBox(height: 2.h,),
           AppTextField(
+              validators: (value) {
+                if(value!.isEmpty){
+                  return "this field is required";
+                }
+              },
               hint: "..........",
               keyboardType: TextInputType.text,
               icon: Icons.model_training_outlined,
-              controller: vehiclesModelEditingController,
+              controller: context.read<SellProductCubit>().vehiclesModelEditingController,
               isPassword: false,
               textInputAction: TextInputAction.next,
               title: "c200"),
@@ -67,10 +76,15 @@ class VehiclesSellItem extends StatelessWidget {
           ),
           SizedBox(height: 2.h,),
           AppTextField(
+              validators: (value) {
+                if(value!.isEmpty){
+                  return "this field is required";
+                }
+              },
               hint: "..........",
               keyboardType: TextInputType.text,
               icon: Icons.format_paint,
-              controller: vehiclesColorEditingController,
+              controller: context.read<SellProductCubit>().vehiclesColorEditingController,
               isPassword: false,
               textInputAction: TextInputAction.next,
               title: "red"),
@@ -85,10 +99,15 @@ class VehiclesSellItem extends StatelessWidget {
           ),
           SizedBox(height: 2.h,),
           AppTextField(
+            validators: (value) {
+              if(value!.isEmpty){
+                return "this field is required";
+              }
+            },
               hint: "..........",
               keyboardType: TextInputType.text,
               icon: Icons.merge_type_outlined,
-              controller: vehiclesTypeEditingController,
+              controller: context.read<SellProductCubit>().vehiclesTypeEditingController,
               isPassword: false,
               textInputAction: TextInputAction.done,
               title: "rent / sale"),

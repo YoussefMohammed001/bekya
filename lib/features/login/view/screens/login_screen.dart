@@ -105,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                                     safePrint("loading");
                                   }
                                   if(state is LoginSuccess){
-                                    pushReplacement(context, MainScreen());
+                                    pushReplacement(context, const MainScreen());
 
                                     safePrint("success");
                                   }
@@ -115,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                                   }
                                 },
                                 builder: (context, state) {
-                                  return cubit.state is LoginLoading ? CircularProgressIndicator(color: AppColors.primary,) :AppButton(
+                                  return cubit.state is LoginLoading ? const CircularProgressIndicator(color: AppColors.primary,) :AppButton(
                                       margin: const EdgeInsets.all(0),
                                       padding: EdgeInsets.all(12.sp),
                                       bgColor: AppColors.primary,

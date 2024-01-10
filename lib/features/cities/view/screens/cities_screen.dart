@@ -59,20 +59,20 @@ final TextEditingController searchController = TextEditingController();
               ),
             ),
             SizedBox(height: 2.h,),
-            AppTextField(
-                onFieldSubmitted: (value){
-                  setState(() {
-
-                  });
-                },
-                hint: "cairo",
-                keyboardType: TextInputType.text,
-                icon: Icons.search_outlined,
-                controller: TextEditingController(),
-                isPassword: false,
-                textInputAction: TextInputAction.search,
-                title: "search for city"),
-            SizedBox(height: 2.h,),
+            // AppTextField(
+            //     onFieldSubmitted: (value){
+            //       setState(() {
+            //
+            //       });
+            //     },
+            //     hint: "cairo",
+            //     keyboardType: TextInputType.text,
+            //     icon: Icons.search_outlined,
+            //     controller: TextEditingController(),
+            //     isPassword: false,
+            //     textInputAction: TextInputAction.search,
+            //     title: "search for city"),
+            // SizedBox(height: 2.h,),
             BlocBuilder<CitiesCubit, CitiesState>(
               builder: (context, state) {
                 return Expanded(

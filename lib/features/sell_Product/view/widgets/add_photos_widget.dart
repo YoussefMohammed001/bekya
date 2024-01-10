@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:bekya/core/styles/colors.dart';
+import 'package:bekya/core/utils/navigators.dart';
 import 'package:bekya/core/utils/safe_print.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
+import 'package:firebase_storage/firebase_storage.dart';
 class AddPhotosWidgets extends StatefulWidget {
-  const AddPhotosWidgets({super.key});
+  const AddPhotosWidgets({super.key, required this.imageFileList});
+  final List<XFile> imageFileList;
 
   @override
   State<AddPhotosWidgets> createState() => _AddPhotosWidgetsState();
@@ -14,19 +16,17 @@ class AddPhotosWidgets extends StatefulWidget {
 
 class _AddPhotosWidgetsState extends State<AddPhotosWidgets> {
   final ImagePicker imagePicker = ImagePicker();
-  List<XFile>? imageFileList = [];
 
   void selectImages() async {
     final List<XFile> selectedImages = await
     imagePicker.pickMultiImage();
     if (selectedImages.isNotEmpty) {
-      imageFileList!.addAll(selectedImages);
+      widget.imageFileList.addAll(selectedImages);
     }
-    safePrint("Image List Length:${imageFileList!.length}");
+    safePrint("Image List Length:${widget.imageFileList.length}");
     setState((){});
   }
-
-  @override
+    @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.sp),
@@ -59,14 +59,14 @@ class _AddPhotosWidgetsState extends State<AddPhotosWidgets> {
             width: double.infinity,
             color: Colors.grey[900],
             height: 20.h,
-            child: imageFileList!.isNotEmpty ?SizedBox(
+            child: widget.imageFileList.isNotEmpty ?SizedBox(
               height: 5.h,
               child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: List.generate(imageFileList!.length, (index) {
+                  children: List.generate(widget.imageFileList.length, (index) {
                     return Container(
                       margin: EdgeInsets.all(12.sp),
-                      child: Image.file(File(imageFileList![index].path),
+                      child: Image.file(File(widget.imageFileList[index].path),
                         height: 10.h,
                         width: 20.w,
                       ),
@@ -97,4 +97,9 @@ class _AddPhotosWidgetsState extends State<AddPhotosWidgets> {
       ),
     );
   }
+
+
+
+
 }
+

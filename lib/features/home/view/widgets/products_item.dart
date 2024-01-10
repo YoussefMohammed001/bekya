@@ -40,13 +40,13 @@ final String title;
         ),
         Container(
           color: AppColors.second,
-          height: 36.h,
+          height: 34.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: (){
-                  push(context, const ProductDetailsScreen());
+                  push(context,  ProductDetailsScreen(productId: '', catId: '',));
                 },
                 child: Container(
                   margin: EdgeInsets.only(right: 15.sp),
@@ -96,34 +96,7 @@ final String title;
                                fontSize: 16.sp,
                        ),
                               ),
-                              Row(
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.bed_outlined,color: AppColors.offWhite,),
-                                      SizedBox(width: 1.w,),
-                                      const Text('5',style: TextStyle(color:AppColors.offWhite ),)
-                                    ],
-                                  ),
-                                  SizedBox(width: 3.w,),
 
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.shower,color: AppColors.offWhite,),
-                                      SizedBox(width: 1.w,),
-                                      const Text('2',style: TextStyle(color:AppColors.offWhite ),)
-                                    ],
-                                  ),
-SizedBox(width: 3.w,),
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.space_dashboard_outlined,color: AppColors.offWhite,),
-                                      SizedBox(width: 1.w,),
-                                      const Text('120 m',style: TextStyle(color:AppColors.offWhite ),)
-                                    ],
-                                  ),
-                                ],
-                              ),
                               SizedBox(height: 1.h,),
                               Text(
                                 "Future City, Cairo",

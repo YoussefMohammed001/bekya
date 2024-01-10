@@ -1,6 +1,13 @@
+import 'dart:io';
+
+import 'package:bekya/core/shared/my_shared.dart';
+import 'package:bekya/core/shared/my_shared_keys.dart';
 import 'package:bekya/core/styles/colors.dart';
 import 'package:bekya/core/utils/navigators.dart';
+import 'package:bekya/core/utils/safe_print.dart';
+import 'package:bekya/core/utils/snack_bar.dart';
 import 'package:bekya/core/widgets/app_button.dart';
+import 'package:bekya/core/widgets/congrats_screen.dart';
 import 'package:bekya/features/sell_Product/manager/sell_product__cubit.dart';
 import 'package:bekya/features/sell_Product/model/appliances_model.dart';
 import 'package:bekya/features/sell_Product/model/fashion_mode.dart';
@@ -17,117 +24,159 @@ import 'package:bekya/features/sell_Product/view/widgets/mobile_sell_item.dart';
 import 'package:bekya/features/sell_Product/view/widgets/pet_sell.dart';
 import 'package:bekya/features/sell_Product/view/widgets/property_sold_item.dart';
 import 'package:bekya/features/sell_Product/view/widgets/vehicles_sell_item.dart';
-import 'package:dropdown_textfield/dropdown_textfield.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 // ignore: must_be_immutable
-class SoldProductDetails extends StatelessWidget {
-  SoldProductDetails(
+class SoldProductDetails extends StatefulWidget {
+  const SoldProductDetails(
       {super.key,
       required this.image,
       required this.id,
       required this.category});
-
   final String image, id, category;
 
-  TextEditingController priceEditingController = TextEditingController();
-  TextEditingController titleEditingController = TextEditingController();
-  TextEditingController descriptionEditingController = TextEditingController();
-  TextEditingController cityEditingController = TextEditingController();
+  @override
+  State<SoldProductDetails> createState() => _SoldProductDetailsState();
+}
 
-  TextEditingController vehiclesNameEditingController = TextEditingController();
-  TextEditingController vehiclesColorEditingController =
-      TextEditingController();
-  TextEditingController vehiclesModelEditingController =
-      TextEditingController();
-  TextEditingController vehiclesTypeEditingController = TextEditingController();
+class _SoldProductDetailsState extends State<SoldProductDetails> {
 
-  SingleValueDropDownController propertyType = SingleValueDropDownController();
-  TextEditingController bedRoomsEditingController = TextEditingController();
-  TextEditingController bathRoomsEditingController = TextEditingController();
-  TextEditingController areaEditingController = TextEditingController();
-
-  TextEditingController mobileModelEditingController = TextEditingController();
-  TextEditingController mobileConditionEditingController =
-      TextEditingController();
-  TextEditingController mobileRamEditingController = TextEditingController();
-  TextEditingController mobileStorageEditingController =
-      TextEditingController();
-
-  TextEditingController appliancesModelEditingController =
-      TextEditingController();
-  TextEditingController appliancesConditionEditingController =
-      TextEditingController();
-
-  TextEditingController fashionModelEditingController = TextEditingController();
-  TextEditingController fashionConditionEditingController =
-      TextEditingController();
-
-  TextEditingController petNameEditingController = TextEditingController();
-  TextEditingController petAgeEditingController = TextEditingController();
-
-  TextEditingController furnitureTypeEditingController =
-      TextEditingController();
-  TextEditingController furnitureConditionEditingController =
-      TextEditingController();
-
+List<String> downloadUrls = [];
+  List<XFile> imageFileList = [];
   final cubit = SellProductCubit();
+
+  Future<List<String>> uploadImages(List<XFile> imageFileList) async {
+    showLoading(context);
+    for (XFile image in imageFileList) {
+      File file = File(image.path);
+      String fileName = file.path.split('/').last;
+
+      try {
+        Reference storageReference = FirebaseStorage.instance.ref().child('images/$fileName');
+        UploadTask uploadTask = storageReference.putFile(file);
+
+        TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
+
+        // Get download URL
+        String downloadUrl = await snapshot.ref.getDownloadURL();
+
+        downloadUrls.add(downloadUrl);
+
+        safePrint('Image uploaded: $downloadUrl');
+      } catch (e) {
+        safePrint('Error uploading image: $e');
+      }
+    }
+    safePrint(downloadUrls);
+    setState(() {
+
+    });
+    // ignore: use_build_context_synchronously
+    pop(context);
+    return downloadUrls;
+  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => cubit,
       child: Scaffold(
-        bottomNavigationBar: AppButton(
-          bgColor: AppColors.primary,
-          padding: EdgeInsets.all(10.sp),
-          margin: EdgeInsets.all(15.sp),
-          borderRadius: BorderRadius.circular(13.sp),
-          onPressed: () {
-            cubit.sellProduct(
-                catId: id,
-                vehiclesModel: VehiclesModel(
-                  vehiclesNameEditingController.text,
-                  vehiclesModelEditingController.text,
-                  vehiclesColorEditingController.text,
-                  vehiclesTypeEditingController.text,
-                ),
-                sellBaseModel:
-                    SellBaseModel(titleEditingController.text,
-
-                        category, priceEditingController.text,
-                        descriptionEditingController.text,
-                        cityEditingController.text , []),
-
-            propertyModel: PropertyModel(areaEditingController.text,
-                bathRoomsEditingController.text, bedRoomsEditingController.text,
-                "" ),
+        bottomNavigationBar: BlocConsumer<SellProductCubit, SellProductState>(
+          listener:  (context, state) {
+            if(state is SellProductSuccess){
+              pushReplacement(context, const AppCongrats(
+                  title: "Product published!", icon: "done.png"));
 
 
-              mobilesModel: MobilesModel(mobileModelEditingController.text,
-                  mobileConditionEditingController.text,
-                  mobileRamEditingController.text,
-                  mobileStorageEditingController.text),
 
-              appliancesModel: AppliancesModel(appliancesModelEditingController.text,
-                  appliancesConditionEditingController.text),
-
-              furnitureModel: FurnitureModel(furnitureTypeEditingController.text,
-                  furnitureConditionEditingController.text
-                  ),
-
-              petsModel: PetsModel(petNameEditingController.text,
-                  petAgeEditingController.text),
-
-              fashionModel: FashionModel(fashionModelEditingController.text,
-                  fashionConditionEditingController.text)
-
-            );
-
+            }
           },
-          label: 'Confirm',
-        ),
+  builder: (context, state) {
+   if(state is SellProductLoading){
+     return const Center(child: CircularProgressIndicator());
+   } else{
+     return AppButton(
+       bgColor: AppColors.primary,
+       padding: EdgeInsets.all(10.sp),
+       margin: EdgeInsets.all(15.sp),
+       borderRadius: BorderRadius.circular(13.sp),
+       onPressed: () {
+         if(context.read<SellProductCubit>().mainFormKey.currentState!.validate()){
+           safePrint(imageFileList);
+
+           if(imageFileList.isNotEmpty){
+             uploadImages(imageFileList).then((value) {
+               DateTime currentDate = DateTime.now();
+
+               cubit.sellProduct(
+                   catId: widget.id,
+                   vehiclesModel: VehiclesModel(
+                     context.read<SellProductCubit>().vehiclesNameEditingController.text,
+                     context.read<SellProductCubit>().vehiclesModelEditingController.text,
+                     context.read<SellProductCubit>().vehiclesColorEditingController.text,
+                     context.read<SellProductCubit>().vehiclesTypeEditingController.text,
+                   ),
+                   sellBaseModel:
+                   SellBaseModel(context.read<SellProductCubit>().titleEditingController.text,
+                     widget.category, context.read<SellProductCubit>().priceEditingController.text,
+                     context.read<SellProductCubit>().descriptionEditingController.text,
+                     context.read<SellProductCubit>().location.dropDownValue!.value ,
+                     downloadUrls,
+                     MyShared.getString(
+                       key: MySharedKeys.userid,),
+                     MyShared.getString(
+                       key: MySharedKeys.username,),
+                     MyShared.getString(
+                       key: MySharedKeys.userImage),
+                       widget.id,currentDate.toString()
+
+                   ),
+                   propertyModel: PropertyModel(
+                       context.read<SellProductCubit>().areaEditingController.text,
+                       context.read<SellProductCubit>().bathRoomsEditingController.text,
+                       context.read<SellProductCubit>().bedRoomsEditingController.text,
+                       context.read<SellProductCubit>().propertyType.dropDownValue?.value
+                       ?? ""
+                   ),
+
+
+                   mobilesModel: MobilesModel(context.read<SellProductCubit>().mobileModelEditingController.text,
+                       context.read<SellProductCubit>().mobileConditionEditingController.text,
+                       context.read<SellProductCubit>().mobileRamEditingController.dropDownValue?.value ?? ""
+                       ,
+
+                       context.read<SellProductCubit>().mobileStorageEditingController.dropDownValue?.value ?? ""),
+                   appliancesModel: AppliancesModel(context.read<SellProductCubit>().appliancesModelEditingController.text,
+                       context.read<SellProductCubit>().appliancesConditionEditingController.text),
+                   furnitureModel: FurnitureModel(context.read<SellProductCubit>().appliancesModelEditingController.text,
+                       context.read<SellProductCubit>().appliancesConditionEditingController.text
+                   ),
+                   petsModel: PetsModel(context.read<SellProductCubit>().petNameEditingController.text,
+                       context.read<SellProductCubit>().petAgeEditingController.text),
+                   fashionModel: FashionModel(context.read<SellProductCubit>().appliancesModelEditingController.text,
+                       context.read<SellProductCubit>().appliancesConditionEditingController.text)
+
+               );
+             });
+           }else{
+             snackBar(context, "Please choose at least 1 image", Colors.red);
+
+           }
+
+         }
+
+
+       },
+       label: 'Confirm',
+     );
+   }
+
+  },
+),
         appBar: AppBar(
           backgroundColor: Colors.grey[900],
           toolbarHeight: 0,
@@ -140,97 +189,73 @@ class SoldProductDetails extends StatelessWidget {
                 minHeight: constraints.maxHeight,
               ),
               child: IntrinsicHeight(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      color: Colors.grey[900],
-                      padding: EdgeInsets.all(13.sp),
-                      child: Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                pop(context);
-                              },
-                              icon: const Icon(
-                                Icons.close,
-                                color: AppColors.offWhite,
-                              )),
-                          Text(
-                            "Include some details",
-                            style: TextStyle(
-                                color: AppColors.offWhite,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                child: Form(
+                  key: cubit.mainFormKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        color: Colors.grey[900],
+                        padding: EdgeInsets.all(13.sp),
+                        child: Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  pop(context);
+                                },
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: AppColors.offWhite,
+                                )),
+                            Text(
+                              "Include some details",
+                              style: TextStyle(
+                                  color: AppColors.offWhite,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const AddPhotosWidgets(),
-                    MainSoldDetailsItem(
-                      image: image,
-                      priceEditingController: priceEditingController,
-                      titleEditingController: titleEditingController,
-                      descriptionEditingController: descriptionEditingController,
-                      id: id,
-                      category: category,
-                    ),
-                    id == '1' ?
-                    VehiclesSellItem(
-                      vehiclesNameEditingController: vehiclesNameEditingController,
-                      vehiclesColorEditingController: vehiclesColorEditingController,
-                      vehiclesModelEditingController: vehiclesModelEditingController,
-                      vehiclesTypeEditingController: vehiclesTypeEditingController,
-                    )
-                        :
-                    id == '2' ?
-                      PropertySoldItem(
-                        type: propertyType,
-                        bedRoomsEditingController: bedRoomsEditingController,
-                        bathRoomsEditingController: bathRoomsEditingController,
-                        areaEditingController: areaEditingController,
+                       AddPhotosWidgets(imageFileList: imageFileList,),
+                      MainSoldDetailsItem(
+                        image: widget.image,
+                        id: widget.id,
+                        category: widget.category,
+                      ),
+
+
+                      widget.id == '1' ?
+                      const VehiclesSellItem(
+
                       )
-                        :
-                        id == "3" ?
-                        MobileSellItem(
-                          mobileModelEditingController: mobileModelEditingController,
-                          mobileConditionEditingController: mobileConditionEditingController,
-                          mobileRamEditingController: mobileRamEditingController,
-                          mobileStorageEditingController: mobileStorageEditingController,
-
+                          :
+                      widget.id == '2' ?
+                        const PropertySoldItem(
                         )
-                            :
-                            id == "4" ?
-                            AppliancesFashionSell(
-                              modelEditingController: appliancesModelEditingController,
-                              conditionEditingController: appliancesConditionEditingController,
+                          :
+                          widget.id == "3" ?
+                          const MobileSellItem(
 
-                            )
+                          )
+                              :
+                              widget.id == "4" ?
+                              const AppliancesFashionSell(
 
-                                :
-                                id == "5" ?
-                                AppliancesFashionSell(
-                                  modelEditingController: fashionModelEditingController,
-                                  conditionEditingController: fashionConditionEditingController,
+                              )
+                                  :
+                                  widget.id == "5" ?
+                                  const AppliancesFashionSell()
+                                      :
+                                      widget.id == "6"?
+                                      const PetSell(
 
-                                )
+                                      )
+                                          :
+                                      const AppliancesFashionSell()
 
-                                    :
-                                    id == "6"?
-                                    PetSell(
-                                      ageEditingController: petAgeEditingController,
-                                      nameEditingController: petNameEditingController,
-
-                                    )
-                                        :
-                                    AppliancesFashionSell(
-                                      modelEditingController:
-                                      furnitureTypeEditingController,
-                                      conditionEditingController: furnitureConditionEditingController,
-
-                                    )
-
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -238,5 +263,12 @@ class SoldProductDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future showLoading(BuildContext context){
+    return showDialog(context: context, builder: (context) => const Stack(
+      alignment: AlignmentDirectional.center,
+      children: [CircularProgressIndicator()],),);
+
   }
 }

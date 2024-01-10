@@ -1,3 +1,5 @@
+import 'package:bekya/core/shared/my_shared.dart';
+import 'package:bekya/core/shared/my_shared_keys.dart';
 import 'package:bekya/core/styles/colors.dart';
 import 'package:bekya/core/utils/navigators.dart';
 import 'package:bekya/core/utils/safe_print.dart';
@@ -31,7 +33,37 @@ final cubit = MainCubit();
           return Scaffold(
 
               backgroundColor: AppColors.second,
-              body:SafeArea(child:  cubit.screens[cubit.index],),
+              body:SafeArea(child: Column(
+                children: [
+                  Visibility(
+                    visible:  MyShared.getBoolean(key: MySharedKeys.isVerified) == false,
+                    child: Container(
+                      color: AppColors.red,
+                      padding: EdgeInsets.all(13.sp),
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Your account is not verified",style: TextStyle(
+                            color: Colors.white
+                          ),),
+                          SizedBox(width: 1.w,),
+                          InkWell(
+                            onTap: () {
+
+                            },
+                            child: const Text("go to your mail inbox and verify your account",style: TextStyle(
+                                color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(child: cubit.screens[cubit.index]),
+                ],
+              ),),
               bottomNavigationBar: Container(
                 decoration: BoxDecoration(
                     border: Border(

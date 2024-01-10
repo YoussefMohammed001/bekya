@@ -1,3 +1,5 @@
+import 'package:bekya/core/shared/my_shared.dart';
+import 'package:bekya/core/shared/my_shared_keys.dart';
 import 'package:bekya/core/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -23,11 +25,20 @@ final String name;
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(name,style: TextStyle(
-                  color: AppColors.offWhite,
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold
-              ),),
+              Row(
+                children: [
+                  Text(name,style: TextStyle(
+                      color: AppColors.offWhite,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold
+                  ),),
+                   SizedBox(width: 1.w,),
+                   MyShared.getBoolean(key: MySharedKeys.isVerified)  ?
+                   Icon(Icons.verified_user_outlined,color: AppColors.primary,)
+                       :
+                Icon(Icons.error_outline,color: AppColors.primary,)
+                ],
+              ),
               Text("View and edit profile",style: TextStyle(
                 color: AppColors.offWhite,
                 fontSize: 17.sp,
