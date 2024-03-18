@@ -16,7 +16,7 @@ final String name;
           CircleAvatar(
             backgroundColor: AppColors.primary,
             radius: 25.sp,
-            child: Text("Y",style: TextStyle(
+            child: Text(name.substring(0,1).toUpperCase(),style: TextStyle(
                 color: AppColors.offWhite,
                 fontSize: 28.sp
             ),),

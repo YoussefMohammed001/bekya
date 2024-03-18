@@ -73,6 +73,7 @@ class HomeCategoriesWidgets extends StatelessWidget {
                           cats[index].category,
                           style: TextStyle(
                               color: AppColors.offWhite, fontSize: 14.sp),
+
                         )
                       ],
                     ),

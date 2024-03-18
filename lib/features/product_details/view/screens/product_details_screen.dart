@@ -1,6 +1,7 @@
 import 'package:bekya/core/styles/colors.dart';
 import 'package:bekya/core/utils/navigators.dart';
 import 'package:bekya/core/widgets/app_image.dart';
+import 'package:bekya/features/chats/view/screens/chat_screen.dart';
 import 'package:bekya/features/product_details/manager/product_details_cubit.dart';
 import 'package:bekya/features/product_details/view/widgets/product_details_header.dart';
 import 'package:bekya/features/product_details/view/widgets/product_details_widget.dart';
@@ -68,31 +69,52 @@ final cubit = ProductDetailsCubit();
                )),
            BottomNavigationBarItem(
                label: '',
-               icon: Container(
-                 margin: EdgeInsets.symmetric(horizontal: 10.sp),
-                 padding: EdgeInsets.all(15.sp),
-                 decoration: BoxDecoration(
-                     color: Colors.grey[900],
-                     borderRadius: BorderRadius.circular(13.sp),
-                     border: Border.all(color: AppColors.primary)),
-                 child: Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                     const Icon(
-                       Icons.wechat_sharp,
-                       color: AppColors.primary,
-                     ),
-                     SizedBox(
-                       width: 2.w,
-                     ),
-                     Text(
-                       "Chat",
-                       style: TextStyle(
-                           color: AppColors.offWhite,
-                           fontWeight: FontWeight.bold,
-                           fontSize: 16.sp),
-                     )
-                   ],
+               icon: InkWell(
+                 onTap: () => push(context, ChatScreen(
+                   receiverId: cubit.productModel.userId,
+                   receiverName: cubit.productModel.userName,
+                   userName: cubit.productModel.userName,)),
+                 child: Container(
+
+                   margin: EdgeInsets.symmetric(horizontal: 10.sp),
+                   padding: EdgeInsets.all(15.sp),
+
+
+
+                   decoration: BoxDecoration(
+
+                       color: Colors.grey[900],
+
+
+
+                       borderRadius: BorderRadius.circular(13.sp),
+
+
+                       border: Border.all(color: AppColors.primary)),
+                   child: Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+
+                     children: [
+                       const Icon(
+                         Icons.wechat_sharp,
+                         color: AppColors.primary,
+
+                       ),
+
+                       SizedBox(
+                         width: 2.w,
+                       ),
+                       Text(
+
+                         "Chat",
+                         style: TextStyle(
+
+                             color: AppColors.offWhite,
+                             fontWeight: FontWeight.bold,
+                             fontSize: 16.sp),
+                       )
+                     ],
+                   ),
                  ),
                )),
            BottomNavigationBarItem(

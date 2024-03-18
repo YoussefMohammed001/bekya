@@ -48,7 +48,7 @@ class CategoriesScreen extends StatelessWidget {
                   icon: cats[index].image,
                   title: cats[index].category,
                   onTap: () {
-                    push(context,  CategoryProducts(id: cats[index].id, category: cats[index].category,));
+                    push(context,  CategoryProducts(id: cats[index].reciverId, category: cats[index].category,));
                   },
                 );
               },
